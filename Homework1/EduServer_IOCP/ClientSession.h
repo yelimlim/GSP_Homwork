@@ -67,7 +67,7 @@ private:
 	SOCKADDR_IN		mClientAddr ;
 		
 	//TODO: mLock; 선언할 것
-    HANDLE          mLock;
+    HANDLE          mLock; ///# 지금 Mutex를 사용하고 있는데 왜?? 윈도우에서 Mutex와 CriticalSection또는 여기에 있는 FastSpinLock의 차이는?? (이거 중요!)
 
 	friend class SessionManager;
 } ;

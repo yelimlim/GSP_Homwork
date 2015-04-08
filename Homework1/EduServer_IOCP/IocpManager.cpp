@@ -74,6 +74,7 @@ bool IocpManager::StartIoThreads()
 		DWORD dwThreadId;
 		//TODO: HANDLE hThread = (HANDLE)_beginthreadex...);
         HANDLE hThread = (HANDLE)_beginthreadex(NULL, 0, IoWorkerThread, (LPVOID)i, 0, (unsigned int*)&dwThreadId);
+		///# 에러처리는?
 	}
 
 	return true;

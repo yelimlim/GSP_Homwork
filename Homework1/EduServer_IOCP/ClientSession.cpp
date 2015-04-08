@@ -42,7 +42,7 @@ bool ClientSession::OnConnect(SOCKADDR_IN* addr)
 
 	GSessionManager->IncreaseConnectionCount();
 
-    ReleaseMutex(mLock);
+    ReleaseMutex(mLock); ///# 위의 return false 부분 에서 탈출하게 되면 뮤텍스는 언제 풀어주나?
 
 	return PostRecv() ;
 }
@@ -53,7 +53,7 @@ void ClientSession::Disconnect(DisconnectReason dr)
     WaitForSingleObject(mLock, INFINITE);
 
 	if ( !IsConnected() )
-		return ;
+		return ; ///# 여기에서 탈출하면? 뮤텍스는 어떻게?
 	
 	LINGER lingerOption ;
 	lingerOption.l_onoff = 1;

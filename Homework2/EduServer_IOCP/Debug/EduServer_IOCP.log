@@ -1,0 +1,20 @@
+﻿빌드 시작: 2015-04-13 오전 2:14:38
+     1>2 노드의 "C:\project\Server\GSP\Homework2\EduServer_IOCP\EduServer_IOCP.vcxproj" 프로젝트(Build 대상)입니다.
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINSOCK_DEPRECATED_NO_WARNINGS /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\EduServer_IOCP.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ClientSession.cpp
+         ClientSession.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\project\Server\GSP\Homework2\Debug\EduServer_IOCP.exe" /INCREMENTAL /NOLOGO winmm.lib ws2_32.lib DbgHelp.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib OPENGL32.LIB GLU32.LIB glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\project\Server\GSP\Homework2\Debug\EduServer_IOCP.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\project\Server\GSP\Homework2\Debug\EduServer_IOCP.lib" /MACHINE:X86 Debug\CircularBuffer.obj
+         Debug\ClientSession.obj
+         Debug\EduServer_IOCP.obj
+         Debug\Exception.obj
+         Debug\FastSpinlock.obj
+         Debug\IocpManager.obj
+         Debug\SessionManager.obj
+         Debug\stdafx.obj
+         EduServer_IOCP.vcxproj -> C:\project\Server\GSP\Homework2\Debug\EduServer_IOCP.exe
+     1>"C:\project\Server\GSP\Homework2\EduServer_IOCP\EduServer_IOCP.vcxproj" 프로젝트를 빌드했습니다(Build 대상).
+
+빌드했습니다.
+
+경과 시간: 00:00:01.09

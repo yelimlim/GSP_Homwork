@@ -51,7 +51,7 @@ bool ClientSession::PostAccept()
     DWORD dwBytes = 0;
     acceptContext->mWsaBuf.len = 0;
     acceptContext->mWsaBuf.buf = nullptr;
-    char buffer[128] = { 0, };
+    char buffer[128] = { 0, }; ///# 이거 로컬 버퍼로 하면 안되겠지? 
 
 	//TODO : AccpetEx를 이용한 구현.
 
@@ -194,7 +194,7 @@ bool ClientSession::PreRecv()
     DWORD recvbytes = 0;
     DWORD flags = 0;
     recvContext->mWsaBuf.len = 0;
-    recvContext->mWsaBuf.buf = mBuffer.GetBuffer();
+    recvContext->mWsaBuf.buf = mBuffer.GetBuffer(); ///# 이거 왜??? null로 걍 ㄱㄱ
 
 
     /// start real recv

@@ -17,26 +17,33 @@ LPFN_DISCONNECTEX    lpfnDisconnectEx;
 
 BOOL DisconnectEx(SOCKET hSocket, LPOVERLAPPED lpOverlapped, DWORD dwFlags, DWORD reserved)
 {
-    if (FALSE == lpfnDisconnectEx(hSocket, lpOverlapped, dwFlags, reserved))
-    {
-        return FALSE;
-    }
+   // if (FALSE == lpfnDisconnectEx(hSocket, lpOverlapped, dwFlags, reserved))
+   // {
+   //     return FALSE;
+   // }
 
 	//return ...
-    return TRUE;
+   // return TRUE;
+
+	///# 그냥 이렇게 하면 되지?
+	return lpfnDisconnectEx(hSocket, lpOverlapped, dwFlags, reserved);
 }
 
 // 참고: 최신 버전의 Windows SDK에서는 그냥 구현되어 있음
 BOOL UserAcceptEx(SOCKET sListenSocket, SOCKET sAcceptSocket, PVOID lpOutputBuffer, DWORD dwReceiveDataLength,
 	DWORD dwLocalAddressLength, DWORD dwRemoteAddressLength, LPDWORD lpdwBytesReceived, LPOVERLAPPED lpOverlapped)
 {
-    if (FALSE == lpfnAcceptex(sListenSocket, sAcceptSocket, lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength, 
-        dwRemoteAddressLength, lpdwBytesReceived, lpOverlapped))
-    {
-        return FALSE;
-    }
+//     if (FALSE == lpfnAcceptex(sListenSocket, sAcceptSocket, lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength, 
+//         dwRemoteAddressLength, lpdwBytesReceived, lpOverlapped))
+//     {
+//         return FALSE;
+//     }
 
-    return TRUE;
+   // return TRUE;
+
+	///# 마찬가지로..
+	return lpfnAcceptex(sListenSocket, sAcceptSocket, lpOutputBuffer, dwReceiveDataLength, dwLocalAddressLength,
+		dwRemoteAddressLength, lpdwBytesReceived, lpOverlapped);
 }
 
 IocpManager::IocpManager() : mCompletionPort(NULL), mIoThreadCount(2), mListenSocket(NULL)
@@ -183,7 +190,7 @@ unsigned int WINAPI IocpManager::IoWorkerThread(LPVOID lpParam)
 			int gle = GetLastError();
 
 			//TODO: check time out first ... GQCS 타임 아웃의 경우는 어떻게?
-            if (WAIT_TIMEOUT == gle)
+            if (WAIT_TIMEOUT == gle) ///# 만일 WAIT_TIMEOUT이 INFINITE가 아니라면? 
             {
                 CRASH_ASSERT(nullptr != theClient);
                 theClient->DisconnectCompletion(DR_COMPLETION_ERROR);

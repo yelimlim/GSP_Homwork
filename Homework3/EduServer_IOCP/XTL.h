@@ -67,7 +67,9 @@ template <class T>
 struct xdeque
 {
 	//TODO: STL 할당자를 사용하는 deque를 type으로 선언
-	typedef std::deque<STLAllocator<T>> type;
+	///# 이게 되나? 테스트 안해본것 같은데, typedef std::deque<STLAllocator<T>> type;
+
+	typedef std::deque<T, STLAllocator<T>> type;
 };
 
 template <class T>
@@ -82,7 +84,9 @@ struct xmap
 {
 	//TODO: STL 할당자 사용하는 map을  type으로 선언
     //std::less<K>로 인해 오름차순으로 정렬된 map이 형성 됨
-	typedef std::map<K, STLAllocator<T>, C> type;
+	///# 이건 틀림.. typedef std::map<K, STLAllocator<T>, C> type;
+
+	typedef std::map<K, T, C, STLAllocator<std::pair<K, T>> > type;
 };
 
 template <class T, class C = std::less<T> >
@@ -90,7 +94,9 @@ struct xset
 {
 	//TODO: STL 할당자 사용하는 set을  type으로 선언
     //위와 같이 오름차순 set
-	typedef std::set<STLAllocator<T>, C> type;
+	///# typedef std::set<STLAllocator<T>, C> type;
+
+	typedef std::set<T, C, STLAllocator<T> > type;
 };
 
 template <class K, class T, class C = std::hash_compare<K, std::less<K>> >
@@ -109,7 +115,9 @@ template <class T, class C = std::less<std::vector<T>::value_type> >
 struct xpriority_queue
 {
 	//TODO: STL 할당자 사용하는 priority_queue을  type으로 선언
-	typedef std::priority_queue<T, std::vector<T>, C> type;
+	///# 이렇게 하면 STLAllocator를 쓰지 않게 된다. typedef std::priority_queue<T, std::vector<T>, C> type;
+
+	typedef std::priority_queue<T, std::vector<T, STLAllocator<T>>, C> type;
 };
 
 typedef std::basic_string<wchar_t, std::char_traits<wchar_t>, STLAllocator<wchar_t>> xstring;

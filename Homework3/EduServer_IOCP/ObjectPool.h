@@ -37,7 +37,7 @@ public:
 
 		uint8_t* pAvailable = mFreeList;
 		mFreeList = *reinterpret_cast<uint8_t**>(pAvailable);
-        //mCurrentUseCount는 어디에 쓰는 거지?
+        //mCurrentUseCount는 어디에 쓰는 거지? ///# 직접 쓰는데 없다. delete에서 crash체크용 ^^
         //나는 이게 다음 빈 곳을 찾아주는 것인 줄 알았는데
         //그냥 mFreeList를 넘겨 주네
 		++mCurrentUseCount;

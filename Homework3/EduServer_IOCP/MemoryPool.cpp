@@ -15,7 +15,7 @@ MemAllocInfo* SmallSizeMemoryPool::Pop()
 {
 	MemAllocInfo* mem = 0;//TODO: InterlockedPopEntrySList를 이용하여 mFreeList에서 pop으로 메모리를 가져올 수 있는지 확인.
 
-    //였다가 reinterpret_cast 써도 되나??
+    //였다가 reinterpret_cast 써도 되나?? ///#된다, 왜 될까?
     //걍 밑에도 했길래...
     mem = reinterpret_cast<MemAllocInfo*> (InterlockedPopEntrySList(&mFreeList));
 
@@ -36,7 +36,7 @@ MemAllocInfo* SmallSizeMemoryPool::Pop()
 void SmallSizeMemoryPool::Push(MemAllocInfo* ptr)
 {
 	//TODO: InterlockedPushEntrySList를 이용하여 메모리풀에 (재사용을 위해) 반납.
-    InterlockedPushEntrySList(&mFreeList, ptr);
+	InterlockedPushEntrySList(&mFreeList, (PSLIST_ENTRY)ptr); ///# 이렇게..
 
 	InterlockedDecrement(&mAllocCount);
 }
@@ -70,7 +70,7 @@ MemoryPool::MemoryPool()
 	}
 
 	//TODO: [2048, 4096] 범위 내에서 256바이트 단위로 SmallSizeMemoryPool을 할당하고 
-    for (int i = 2048; i < 4096; i += 256)
+	for (int i = 2048; i <= 4096; i += 256) ///#  "]" 로 끝났으니 4096포함이다. for (int i = 2048; i < 4096; i += 256)
     {
         SmallSizeMemoryPool* pool = new SmallSizeMemoryPool(i);
         for (int j = recent + 1; j <= i; ++j)
@@ -80,7 +80,7 @@ MemoryPool::MemoryPool()
         recent = i;
     }
 	//TODO: mSmallSizeMemoryPoolTable에 O(1) access가 가능하도록 SmallSizeMemoryPool의 주소 기록
-    //?
+    //? ///# 위의 코드를 이해 못했는가? 그럼 질문하도록..
 	
 
 }

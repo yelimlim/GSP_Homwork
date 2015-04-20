@@ -17,9 +17,13 @@ struct MemAllocInfo : SLIST_ENTRY
 inline void* AttachMemAllocInfo(MemAllocInfo* header, int size)
 {
 	//TODO: header에 MemAllocInfo를 펼친 다음에 실제 앱에서 사용할 메모리 주소를 void*로 리턴... 실제 사용되는 예 및 DetachMemAllocInfo 참고.
-    header->mAllocSize = size;
-    ++header;
-    return header;
+    //header->mAllocSize = size;
+    //++header;
+    //return header;
+
+	/// 이렇게...replacement new로 생성자를 불러줘야한다.  
+	new (header)MemAllocInfo(size);
+	return reinterpret_cast<void*>(++header);
 }
 
 inline MemAllocInfo* DetachMemAllocInfo(void* ptr)
@@ -84,15 +88,20 @@ public:
 
         //TODO: T* obj = xnew<T>(...); 처럼 사용할 수있도록 메모리풀에서 할당하고 생성자 불러주고 리턴.
 
-        void* alloc = nullptr;
+        //void* alloc = nullptr;
 
         //할당하고
-        alloc = GMemoryPool->Allocate(sizeof(T));
+        //alloc = GMemoryPool->Allocate(sizeof(T));
 
         //생성자 불러주기 (.... 맞나?)
-        alloc = new T(arg...);
+        //alloc = new T(arg...);
 
         //TODO: ... ...
+
+		///# 이렇게 풀에서 할당 받은 다음 replacement new로 생성자를 불러줘야 한다.
+		void* alloc = GMemoryPool->Allocate(sizeof(T));
+		new (alloc)T(arg...);
+
 
         return reinterpret_cast<T*>(alloc);
     }

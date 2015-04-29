@@ -36,7 +36,7 @@ int PlayerManager::GetCurrentPlayers(PlayerList& outList)
         outList.push_back(playr.second);
     }
 
-	int total = outList.size();
+	int total = outList.size(); ///# 바로 리턴하면 되지 굳이 total에 담을 이유가 ㅎㅎ
 
 	return total;
 }

@@ -34,7 +34,7 @@ public:
 				if (mCentralTaskQueue.try_pop(task))
 				{
 					//TODO: task를 수행하고 mRemainTaskCount를 하나 감소 
-                    task(); //???
+                    task(); //??? ///# bind() 객체니까 바로 호출하면 실행되겠지?
 					// mRemainTaskCount가 0이면 break;
                     if (InterlockedDecrement64(&mRemainTaskCount) == 0)
                     {
